@@ -22,10 +22,10 @@ const App: React.FC = () => {
 
   // Optimized Loading Sequence
   useEffect(() => {
-    // Sync with LoadingScreen sequence
+    // Reduced delay for better TTI and FCP scores
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1800); 
+    }, 1200); 
     return () => clearTimeout(timer);
   }, []);
 
@@ -48,9 +48,7 @@ const App: React.FC = () => {
 
   const handleHomeClick = () => {
     setView('home');
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   // Performance: Memoized components to prevent unnecessary re-renders during interactions
@@ -79,7 +77,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-[100svh] bg-slate-950 font-sans antialiased text-slate-100 animate-fade-in">
+    <div className="min-h-[100svh] bg-slate-950 font-sans antialiased text-slate-100 animate-in fade-in">
       <Navbar onHomeClick={handleHomeClick} />
       
       <main className="relative">

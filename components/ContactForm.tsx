@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Send, CheckCircle2, Mail, MapPin, Linkedin, Github, AlertCircle } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
 import { useLanguage } from '../LanguageContext';
@@ -24,12 +24,6 @@ const ContactForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const { t } = useLanguage();
-
-  // Safety guard for window/document access (Production SSR readiness)
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -68,7 +62,7 @@ const ContactForm: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      if (typeof window === 'undefined' || typeof window.grecaptcha === 'undefined') {
+      if (typeof window.grecaptcha === 'undefined') {
         throw new Error(t.contact.form.errorCaptcha);
       }
 
@@ -110,8 +104,6 @@ const ContactForm: React.FC = () => {
       setFieldErrors(prev => ({ ...prev, [field]: undefined }));
     }
   };
-
-  if (!isMounted) return null; // Avoid hydration mismatch on server
 
   return (
     <section id="contact" className="py-24 bg-slate-900 relative">

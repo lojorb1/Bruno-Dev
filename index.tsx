@@ -1,5 +1,4 @@
 
-import './style.css'; // Primary side-effect: Import production CSS first
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

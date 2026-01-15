@@ -13,9 +13,7 @@ const LegalView: React.FC<LegalViewProps> = ({ type, onClose }) => {
   const content = type === 'privacy' ? t.legal.privacy : t.legal.terms;
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.scrollTo(0, 0);
-    }
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -53,7 +51,7 @@ const LegalView: React.FC<LegalViewProps> = ({ type, onClose }) => {
 
         <div className="space-y-12">
           {content.sections.map((section, idx) => (
-            <section key={idx} className="space-y-4 animate-slide-up-sm" style={{ animationDelay: `${idx * 100}ms` }}>
+            <section key={idx} className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${idx * 100}ms` }}>
               <h2 className="text-xl font-bold text-white border-l-4 border-blue-600 pl-4 py-1">
                 {section.h}
               </h2>
