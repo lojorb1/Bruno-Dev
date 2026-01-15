@@ -92,6 +92,8 @@ export const translations = {
         submit: 'Send Project Inquiry',
         sending: 'Processing...',
         error: 'Network error. Please try again or contact via LinkedIn.',
+        errorCaptcha: 'Security check failed. Please refresh the page and try again.',
+        captchaDisclaimer: 'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.',
         validation: {
           name: "Name is required (min 2 characters).",
           email: "Please enter a valid business email.",
@@ -121,8 +123,8 @@ export const translations = {
           { h: '1. Introduction', p: 'This Privacy Policy explains how BrunoDev ("we", "us", or "our") collects, uses, and shares your personal information. We are committed to protecting your privacy in compliance with GDPR (EU), LGPD (Brazil), and CCPA (USA).' },
           { h: '2. Data Collection', p: 'We collect information you provide directly through our contact form (Name, Email, Message) and technical data collected automatically via cookies (IP address, browser type).' },
           { h: '3. Data Usage', p: 'Your data is used solely to respond to inquiries, provide services, and improve website performance. We do not sell your personal data to third parties.' },
-          { h: '4. Your Rights', p: 'Under GDPR and LGPD, you have the right to access, correct, or delete your data. CCPA provides similar rights to California residents. To exercise these, email ' + legalCommon.en.contact },
-          { h: '5. Security', p: 'We implement industry-standard security measures to protect your data from unauthorized access or disclosure.' }
+          { h: '4. Security & Bot Protection', p: 'We use Google reCAPTCHA v3 to prevent spam and abuse. This service analyzes your interactions to differentiate between human users and automated bots. Google’s Privacy Policy and Terms of Use apply.' },
+          { h: '5. Your Rights', p: 'Under GDPR and LGPD, you have the right to access, correct, or delete your data. CCPA provides similar rights to California residents. To exercise these, email ' + legalCommon.en.contact }
         ]
       },
       terms: {
@@ -166,7 +168,7 @@ export const translations = {
     },
     services: {
       tag: 'Como Posso Ajudar',
-      title: 'Serviços de Software Estratégicos',
+      title: 'Servisços de Software Estratégicos',
       subtitle: 'Contrate um parceiro técnico confiável para seus projetos críticos de desenvolvimento de software e infraestrutura.',
       items: [
         { title: 'Desenvolvimento Sob Medida', desc: 'Engenharia de software personalizada desenhada para fluxos de negócio específicos e escalabilidade.' },
@@ -209,6 +211,8 @@ export const translations = {
         submit: 'Enviar Solicitação de Projeto',
         sending: 'Processando...',
         error: 'Erro de rede. Tente novamente ou entre em contato via LinkedIn.',
+        errorCaptcha: 'Falha na verificação de segurança. Atualize a página e tente novamente.',
+        captchaDisclaimer: 'Este site é protegido por reCAPTCHA e as Políticas de Privacidade e Termos de Uso do Google se aplicam.',
         validation: {
           name: "Nome é obrigatório (mín. 2 caracteres).",
           email: "Por favor, insira um e-mail corporativo válido.",
@@ -237,7 +241,8 @@ export const translations = {
         sections: [
           { h: '1. Introdução', p: 'Esta Política explica como coletamos e usamos seus dados, seguindo o RGPD (UE) e LGPD (Brasil).' },
           { h: '2. Coleta de Dados', p: 'Coletamos Nome, E-mail e Mensagem via formulário para fins de prestação de serviços.' },
-          { h: '3. Uso dos Dados', p: 'Usados apenas para responder orçamentos e melhorar a performance do site.' }
+          { h: '3. Uso dos Dados', p: 'Usados apenas para responder orçamentos e melhorar a performance do site.' },
+          { h: '4. Proteção contra Bots', p: 'Utilizamos o Google reCAPTCHA v3 para evitar spam. O serviço analisa seu comportamento no site para diferenciar humanos de bots. Aplicam-se a Privacidade e Termos do Google.' }
         ]
       },
       terms: {
@@ -259,7 +264,7 @@ export const translations = {
       badge: 'Disponible para Proyectos Internacionales',
       title1: 'Contrate a un Desarrollador Senior para',
       title2: 'Software a Medida y Soluciones SaaS',
-      subtitle: 'Ingeniería full-stack y consultoría de infraestructura. Ayudo a startups y empresas a construir productos digitales seguros y escalables.',
+      subtitle: 'Ingeniería full-stack e consultoría de infraestructura. Ayudo a startups y empresas a construir productos digitales seguros y escalables.',
       ctaPrimary: 'Contratar Ahora',
       ctaSecondary: 'Consultoría por WhatsApp',
       stats: { years: 'Años Exp', projects: 'Resultados', uptime: 'Foco en Uptime', monitoring: 'Confiabilidad' }
@@ -321,6 +326,8 @@ export const translations = {
         submit: 'Enviar Solicitud de Proyecto',
         sending: 'Procesando...',
         error: 'Error de red. Inténtelo de nuevo o contacte vía LinkedIn.',
+        errorCaptcha: 'La verificación de seguridad falló. Refresque la página e intente de nuevo.',
+        captchaDisclaimer: 'Este sitio está protegido por reCAPTCHA y se aplican la Política de Privacidad y Términos de Uso de Google.',
         validation: {
           name: "El nombre es obligatorio (mín. 2 caracteres).",
           email: "Por favor, introduzca un email corporativo válido.",
@@ -347,7 +354,8 @@ export const translations = {
         title: 'Política de Privacidad',
         lastUpdated: legalCommon.es.lastUpdated,
         sections: [
-          { h: '1. Introducción', p: 'Esta Política explica cómo tratamos sus datos personales según el RGPD (UE).' }
+          { h: '1. Introducción', p: 'Esta Política explica cómo tratamos sus datos personales según el RGPD (UE).' },
+          { h: '4. Protección contra Bots', p: 'Usamos Google reCAPTCHA v3 para evitar el spam. El servicio analiza sus interacciones para diferenciar humanos de bots. Se aplican la Privacidad y Términos de Google.' }
         ]
       },
       terms: {

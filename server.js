@@ -1,7 +1,7 @@
 
 /**
  * Senior Software Engineer Portfolio Backend
- * Implementation: Node.js + Express + Nodemailer
+ * Implementation: Node.js + Express + Nodemailer + reCAPTCHA v3
  */
 
 // Browser guard: prevent execution in frontend environment
@@ -11,6 +11,7 @@ if (typeof window !== 'undefined') {
   const express = require('express');
   const cors = require('cors');
   const nodemailer = require('nodemailer');
+  const fetch = require('node-fetch'); // Standard for server-side requests in Node
   require('dotenv').config();
 
   const app = express();
@@ -53,8 +54,22 @@ if (typeof window !== 'undefined') {
     }
   });
 
+  /**
+   * Helper to verify reCAPTCHA v3 token
+   */
+  async function verifyCaptcha(token) {
+    const secret = process.env.RECAPTCHA_SECRET_KEY || '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'; // Use test secret if env not set
+    const response = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`, {
+      method: 'POST'
+    });
+    const data = await response.json();
+    return data;
+  }
+
   app.post('/contact', async (req, res) => {
-    const { name, email, message } = req.body;
+    const { name, email, message, captchaToken } = req.body;
+    
+    // 1. Basic Validation
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'All fields (name, email, message) are required.' });
     }
@@ -63,7 +78,21 @@ if (typeof window !== 'undefined') {
       return res.status(400).json({ error: 'Invalid email format.' });
     }
 
+    // 2. Security: Bot Protection (reCAPTCHA)
+    if (!captchaToken) {
+      return res.status(403).json({ error: 'Security token is missing.' });
+    }
+
     try {
+      const captchaResult = await verifyCaptcha(captchaToken);
+      
+      // Check score (0.5 is usually safe for v3 contact forms)
+      if (!captchaResult.success || captchaResult.score < 0.5 || captchaResult.action !== 'contact_submit') {
+        console.warn(`Blocked suspicious request. Score: ${captchaResult.score}, Action: ${captchaResult.action}`);
+        return res.status(403).json({ error: 'Verification failed. Request flagged as automated.' });
+      }
+
+      // 3. Email Processing
       const mailOptions = {
         from: `"${name}" <${process.env.SMTP_USER}>`,
         replyTo: email,
@@ -75,17 +104,20 @@ if (typeof window !== 'undefined') {
             <h2 style="color: #2563eb;">New Portfolio Inquiry</h2>
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Bot Score:</strong> ${captchaResult.score}</p>
             <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
             <p><strong>Message:</strong></p>
             <p style="white-space: pre-wrap;">${message}</p>
           </div>
         `,
       };
+      
       await transporter.sendMail(mailOptions);
       return res.status(200).json({ message: 'Message sent successfully.' });
+      
     } catch (error) {
-      console.error('Error sending email:', error);
-      return res.status(500).json({ error: 'Failed to send message.' });
+      console.error('Error processing contact form:', error);
+      return res.status(500).json({ error: 'Failed to process request.' });
     }
   });
 

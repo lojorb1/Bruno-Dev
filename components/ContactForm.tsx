@@ -4,6 +4,12 @@ import { Send, CheckCircle2, Mail, MapPin, Linkedin, Github, AlertCircle } from 
 import { SOCIAL_LINKS } from '../constants';
 import { useLanguage } from '../LanguageContext';
 
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}
+
 interface FieldErrors {
   name?: string;
   email?: string;
@@ -54,17 +60,31 @@ const ContactForm: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // Note: This endpoint is simulated for the demonstration
+      // Execute reCAPTCHA v3
+      if (typeof window.grecaptcha === 'undefined') {
+        throw new Error(t.contact.form.errorCaptcha);
+      }
+
+      const captchaToken = await new Promise<string>((resolve, reject) => {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', { action: 'contact_submit' })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
+
+      // Send to backend with captcha token
       const response = await fetch('/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, captchaToken }),
       });
 
       if (!response.ok) {
-        throw new Error(t.contact.form.error);
+        const data = await response.json();
+        throw new Error(data.error || t.contact.form.error);
       }
 
       setIsSuccess(true);
@@ -207,19 +227,26 @@ const ContactForm: React.FC = () => {
                       <p className="mt-1 text-xs text-red-400 font-medium">{fieldErrors.message}</p>
                     )}
                   </div>
-                  <button 
-                    disabled={isSubmitting}
-                    className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20"
-                  >
-                    {isSubmitting ? (
-                      <span className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                    ) : (
-                      <>
-                        {t.contact.form.submit}
-                        <Send className="w-5 h-5" />
-                      </>
-                    )}
-                  </button>
+                  
+                  <div className="space-y-4">
+                    <button 
+                      disabled={isSubmitting}
+                      className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20"
+                    >
+                      {isSubmitting ? (
+                        <span className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                      ) : (
+                        <>
+                          {t.contact.form.submit}
+                          <Send className="w-5 h-5" />
+                        </>
+                      )}
+                    </button>
+                    
+                    <p className="text-[10px] text-slate-500 text-center leading-tight">
+                      {t.contact.form.captchaDisclaimer}
+                    </p>
+                  </div>
                 </form>
               )}
             </div>
