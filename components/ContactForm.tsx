@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle2, Mail, MapPin, Linkedin, Github, AlertCircle } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
 import { useLanguage } from '../LanguageContext';
@@ -30,6 +30,12 @@ const ContactForm: React.FC = () => {
     email: '',
     message: ''
   });
+
+  // Client-side guard for hydration/SSR safety
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const validate = (): boolean => {
     const errors: FieldErrors = {};
@@ -62,7 +68,7 @@ const ContactForm: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      if (typeof window.grecaptcha === 'undefined') {
+      if (typeof window === 'undefined' || typeof window.grecaptcha === 'undefined') {
         throw new Error(t.contact.form.errorCaptcha);
       }
 
@@ -104,6 +110,8 @@ const ContactForm: React.FC = () => {
       setFieldErrors(prev => ({ ...prev, [field]: undefined }));
     }
   };
+
+  if (!isClient) return null; // Prevent mismatched hydration if running in SSR context
 
   return (
     <section id="contact" className="py-24 bg-slate-900 relative">
