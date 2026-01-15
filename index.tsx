@@ -1,9 +1,9 @@
 
+import './style.css'; // Primary side-effect: Import production CSS first
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { LanguageProvider } from './LanguageContext';
-import './style.css'; // Import compiled Tailwind CSS
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

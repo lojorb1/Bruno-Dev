@@ -5,16 +5,23 @@ export default {
     "./index.html",
     "./index.tsx",
     "./App.tsx",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./LanguageContext.tsx",
+    "./translations.ts",
     "./constants.tsx",
+    "./types.ts",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
       animation: {
-        'in': 'fadeIn 0.8s ease-out forwards',
         'fade-in': 'fadeIn 0.8s ease-out forwards',
-        'slide-in-from-bottom-2': 'slideInFromBottom 0.5s ease-out forwards',
-        'slide-in-from-bottom-10': 'slideInFromBottom 0.6s ease-out forwards',
+        'slide-up-sm': 'slideInFromBottom 0.5s ease-out forwards',
+        'slide-up-lg': 'slideInFromBottom 0.8s ease-out forwards',
+        'pulse-glow': 'pulse-glow 4s ease-in-out infinite',
+        'float': 'float 5s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -24,9 +31,17 @@ export default {
         slideInFromBottom: {
           '0%': { transform: 'translateY(15px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { opacity: '0.4', filter: 'blur(60px)', transform: 'scale(1)' },
+          '50%': { opacity: '0.7', filter: 'blur(80px)', transform: 'scale(1.05)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
         }
       }
-    }
+    },
   },
   plugins: [],
 }

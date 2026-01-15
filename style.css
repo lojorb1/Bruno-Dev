@@ -22,21 +22,24 @@
     @apply bg-slate-900/60 backdrop-blur-xl border border-white/10;
   }
 
-  /* Hardware Accelerated Animations */
+  /* SVG Drawing Animation */
   @keyframes draw {
-    from { stroke-dashoffset: 1000; }
-    to { stroke-dashoffset: 0; }
+    0% { stroke-dashoffset: 100; opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 1; }
   }
+
   .animate-draw path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw 3s ease-in-out infinite;
-    will-change: stroke-dashoffset;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: draw 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: stroke-dashoffset, opacity;
   }
-  
+
+  /* Standard Shimmer effect */
   @keyframes shimmer {
-    0% { transform: translateX(-100%) translateZ(0); }
-    100% { transform: translateX(100%) translateZ(0); }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
   .animate-shimmer {
     @apply relative overflow-hidden;
@@ -44,28 +47,8 @@
   .animate-shimmer::after {
     content: "";
     @apply absolute inset-0;
-    transform: translateX(-100%);
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
     animation: shimmer 2s linear infinite;
-    will-change: transform;
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.5; filter: blur(8px); transform: scale(1) translateZ(0); }
-    50% { opacity: 0.8; filter: blur(12px); transform: scale(1.05) translateZ(0); }
-  }
-  .animate-pulse-glow {
-    animation: pulse-glow 4s ease-in-out infinite;
-    will-change: opacity, transform, filter;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0) translateZ(0); }
-    50% { transform: translateY(-10px) translateZ(0); }
-  }
-  .animate-float {
-    animation: float 5s ease-in-out infinite;
-    will-change: transform;
   }
 
   @media (prefers-reduced-motion: reduce) {

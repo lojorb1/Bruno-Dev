@@ -25,17 +25,17 @@ const ContactForm: React.FC = () => {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const { t } = useLanguage();
 
+  // Safety guard for window/document access (Production SSR readiness)
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
-
-  // Client-side guard for hydration/SSR safety
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const validate = (): boolean => {
     const errors: FieldErrors = {};
@@ -111,7 +111,7 @@ const ContactForm: React.FC = () => {
     }
   };
 
-  if (!isClient) return null; // Prevent mismatched hydration if running in SSR context
+  if (!isMounted) return null; // Avoid hydration mismatch on server
 
   return (
     <section id="contact" className="py-24 bg-slate-900 relative">
