@@ -18,8 +18,12 @@ const About: React.FC = () => {
             <div className="relative aspect-square overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-slate-900">
               <img 
                 src="https://i.ibb.co/pjfnK6xC/profile-01.jpg" 
-                alt="Bruno - Senior Developer" 
+                alt="Bruno - Senior Software Developer" 
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="600"
               />
               {/* Subtle hover overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

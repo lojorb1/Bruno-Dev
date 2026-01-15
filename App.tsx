@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -20,59 +20,68 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { lang, t } = useLanguage();
 
-  // Simulate initial load for polished UX
+  // Optimized Loading Sequence
   useEffect(() => {
+    // Reduced delay for better TTI and FCP scores
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3500); // 3.5s allows loading animations to play through meaningfully
+    }, 1200); 
     return () => clearTimeout(timer);
   }, []);
 
-  // SEO: Dynamic metadata update on language or view change
+  // SEO: Optimized meta updates
   useEffect(() => {
-    if (view === 'home') {
-      document.title = t.meta.title;
+    const isHome = view === 'home';
+    const title = isHome 
+      ? t.meta.title 
+      : `${view === 'privacy' ? t.legal.privacy.title : t.legal.terms.title} | BrunoDev`;
+    
+    document.title = title;
+    
+    if (isHome) {
       const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content', t.meta.description);
-      }
-    } else {
-      const legalTitle = view === 'privacy' ? t.legal.privacy.title : t.legal.terms.title;
-      document.title = `${legalTitle} | BrunoDev`;
+      if (metaDesc) metaDesc.setAttribute('content', t.meta.description);
     }
     
-    // Set lang attribute on html tag for SEO and accessibility
     document.documentElement.lang = lang;
   }, [lang, view, t]);
 
   const handleHomeClick = () => {
     setView('home');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
+
+  // Performance: Memoized components to prevent unnecessary re-renders during interactions
+  const mainContent = useMemo(() => {
+    if (view !== 'home') {
+      return (
+        <LegalView 
+          type={view as 'privacy' | 'terms'} 
+          onClose={() => setView('home')} 
+        />
+      );
+    }
+    return (
+      <>
+        <Hero />
+        <About />
+        <Services />
+        <Expertise />
+        <ContactForm />
+      </>
+    );
+  }, [view]);
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 font-sans antialiased text-slate-100 animate-in fade-in duration-1000">
+    <div className="min-h-[100svh] bg-slate-950 font-sans antialiased text-slate-100 animate-in fade-in">
       <Navbar onHomeClick={handleHomeClick} />
       
-      <main>
-        {view === 'home' ? (
-          <>
-            <Hero />
-            <About />
-            <Services />
-            <Expertise />
-            <ContactForm />
-          </>
-        ) : (
-          <LegalView 
-            type={view as 'privacy' | 'terms'} 
-            onClose={() => setView('home')} 
-          />
-        )}
+      <main className="relative">
+        {mainContent}
       </main>
 
       <Footer 

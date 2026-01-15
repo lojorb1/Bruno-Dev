@@ -3,8 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://esm.sh" crossorigin>
+    <link rel="dns-prefetch" href="https://i.ibb.co">
+
     <!-- Primary SEO Metadata -->
     <title>Hire Senior Software Developer | Custom Software & SaaS Development | BrunoDev</title>
     <meta name="description" content="Looking to hire a senior software developer? BrunoDev provides expert custom web development, SaaS solutions, and cybersecurity consulting for startups and enterprises.">
@@ -31,53 +37,146 @@
     <meta property="twitter:description" content="Scalable, secure, and high-performance software development services for businesses worldwide.">
     <meta property="twitter:image" content="https://i.ibb.co/pjfnK6xC/profile-01.jpg">
 
-    <!-- Structured Data: ProfessionalService & Person -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "BrunoDev - Senior Software Development",
-        "image": "https://i.ibb.co/pjfnK6xC/profile-01.jpg",
-        "url": "https://brunodev.eu",
-        "telephone": "",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "EU"
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://brunodev.eu/#organization",
+          "name": "BrunoDev - Senior Software Development",
+          "image": "https://i.ibb.co/pjfnK6xC/profile-01.jpg",
+          "url": "https://brunodev.eu",
+          "priceRange": "$$$",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "EU"
+          },
+          "description": "Professional senior software development services specializing in Full Stack engineering, Custom SaaS platforms, and Cybersecurity auditing.",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Software Development Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Custom Software Development",
+                  "description": "End-to-end bespoke software engineering designed for specific business workflows and scalability."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "SaaS Platform Engineering",
+                  "description": "Building multi-tenant SaaS products from the ground up, focusing on performance and recurring revenue logic."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "API & Systems Integration",
+                  "description": "Developing robust API architectures and connecting disparate business systems such as Stripe, CRMs, and ERPs."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Secure Cloud Infrastructure",
+                  "description": "Expert management of AWS/GCP environments with Docker, CI/CD, and high-availability protocols."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Cybersecurity Auditing",
+                  "description": "Professional vulnerability assessments and secure code audits to protect enterprise data assets."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Performance Engineering",
+                  "description": "Rescuing slow systems, optimizing database logic, and scaling legacy platforms for high performance."
+                }
+              }
+            ]
+          }
         },
-        "priceRange": "$$$",
-        "description": "Hire a Senior Software Developer specializing in Full Stack web development, Custom SaaS, and Cybersecurity.",
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Software Development Services",
-          "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Software Development" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SaaS Platform Engineering" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cybersecurity Consulting" } }
-          ]
+        {
+          "@type": "Person",
+          "@id": "https://brunodev.eu/#person",
+          "name": "Bruno",
+          "jobTitle": "Senior Software Engineer",
+          "url": "https://brunodev.eu",
+          "sameAs": [
+            "https://github.com/lojorb1",
+            "https://www.linkedin.com/in/brunodeveu/"
+          ],
+          "worksFor": { "@id": "https://brunodev.eu/#organization" },
+          "knowsAbout": ["Full Stack Development", "SaaS Engineering", "Cybersecurity", "Cloud Infrastructure", "Laravel", "React", "Docker", "Node.js"]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://brunodev.eu/#webpage",
+          "url": "https://brunodev.eu",
+          "name": "BrunoDev | Senior Software Development Portfolio",
+          "description": "Hire a senior developer with 10+ years of experience in SaaS development and cybersecurity.",
+          "mainEntity": { "@id": "https://brunodev.eu/#person" }
         }
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Bruno",
-        "jobTitle": "Senior Software Engineer",
-        "url": "https://brunodev.eu",
-        "sameAs": [
-          "https://github.com/lojorb1",
-          "https://www.linkedin.com/in/brunodeveu/"
-        ],
-        "knowsAbout": ["Full Stack Development", "SaaS", "Cybersecurity", "Infrastructure", "Laravel", "React", "Docker"]
-      }
-    ]
+      ]
+    }
+    </script>
+
+    <!-- Polyfill for process -->
+    <script>
+        window.process = { env: { NODE_ENV: 'production' } };
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'in': 'fadeIn 0.8s ease-out forwards',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'slide-in-from-bottom-2': 'slideInFromBottom 0.5s ease-out forwards',
+                        'slide-in-from-bottom-10': 'slideInFromBottom 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideInFromBottom: {
+                            '0%': { transform: 'translateY(15px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            background-color: #020617; /* slate-950 */
+        }
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .bg-grid-white {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
@@ -85,23 +184,25 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Animations */
+        /* Hardware Accelerated Animations */
         @keyframes draw {
           from { stroke-dashoffset: 1000; }
           to { stroke-dashoffset: 0; }
         }
-        .animate-draw {
+        .animate-draw path {
           stroke-dasharray: 1000;
           stroke-dashoffset: 1000;
           animation: draw 3s ease-in-out infinite;
+          will-change: stroke-dashoffset;
         }
         
         @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
+          0% { transform: translateX(-100%) translateZ(0); }
+          100% { transform: translateX(100%) translateZ(0); }
         }
         .animate-shimmer {
           position: relative;
@@ -113,26 +214,28 @@
           inset: 0;
           transform: translateX(-100%);
           background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-          animation: shimmer 2s infinite;
+          animation: shimmer 2s linear infinite;
+          will-change: transform;
         }
 
         @keyframes pulse-glow {
-          0%, 100% { opacity: 0.5; filter: blur(8px); }
-          50% { opacity: 1; filter: blur(12px); }
+          0%, 100% { opacity: 0.5; filter: blur(8px); transform: scale(1) translateZ(0); }
+          50% { opacity: 0.8; filter: blur(12px); transform: scale(1.05) translateZ(0); }
         }
         .animate-pulse-glow {
-          animation: pulse-glow 3s ease-in-out infinite;
+          animation: pulse-glow 4s ease-in-out infinite;
+          will-change: opacity, transform, filter;
         }
 
         @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          0%, 100% { transform: translateY(0) translateZ(0); }
+          50% { transform: translateY(-10px) translateZ(0); }
         }
         .animate-float {
           animation: float 5s ease-in-out infinite;
+          will-change: transform;
         }
 
-        /* Reduce Motion */
         @media (prefers-reduced-motion: reduce) {
           * {
             animation-duration: 0.01ms !important;
@@ -145,10 +248,11 @@
 <script type="importmap">
 {
   "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+    "lucide-react": "https://esm.sh/lucide-react@^0.473.0?external=react",
+    "react/": "https://esm.sh/react@^19.0.0/",
+    "react": "https://esm.sh/react@^19.0.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.0.0/",
+    "react-dom/client": "https://esm.sh/react-dom@^19.0.0/client"
   }
 }
 </script>
