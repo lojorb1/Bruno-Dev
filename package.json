@@ -11,7 +11,9 @@
   "dependencies": {
     "lucide-react": "^0.473.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "@vercel/node": "^5.5.20",
+    "nodemailer": "^7.0.12"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

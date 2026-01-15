@@ -16,6 +16,8 @@ interface FieldErrors {
   message?: string;
 }
 
+const SITE_KEY = (import.meta as any).env?.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+
 const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -60,21 +62,19 @@ const ContactForm: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // Execute reCAPTCHA v3
       if (typeof window.grecaptcha === 'undefined') {
         throw new Error(t.contact.form.errorCaptcha);
       }
 
       const captchaToken = await new Promise<string>((resolve, reject) => {
         window.grecaptcha.ready(() => {
-          window.grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', { action: 'contact_submit' })
+          window.grecaptcha.execute(SITE_KEY, { action: 'contact_submit' })
             .then(resolve)
             .catch(reject);
         });
       });
 
-      // Send to backend with captcha token
-      const response = await fetch('/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,6 @@ const ContactForm: React.FC = () => {
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    // Clear field error when user starts typing
     if (fieldErrors[field]) {
       setFieldErrors(prev => ({ ...prev, [field]: undefined }));
     }
@@ -139,20 +138,10 @@ const ContactForm: React.FC = () => {
             </div>
 
             <div className="flex space-x-4">
-              <a 
-                href={SOCIAL_LINKS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 hover:bg-blue-600 transition-colors"
-              >
+              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 hover:bg-blue-600 transition-colors">
                 <Linkedin className="text-white w-5 h-5" />
               </a>
-              <a 
-                href={SOCIAL_LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 hover:bg-slate-700 transition-colors"
-              >
+              <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 hover:bg-slate-700 transition-colors">
                 <Github className="text-white w-5 h-5" />
               </a>
             </div>
@@ -168,10 +157,7 @@ const ContactForm: React.FC = () => {
                   </div>
                   <h4 className="text-2xl font-bold text-white mb-2">{t.contact.form.successTitle}</h4>
                   <p className="text-slate-400">{t.contact.form.successDesc}</p>
-                  <button 
-                    onClick={() => setIsSuccess(false)}
-                    className="mt-8 text-blue-400 hover:text-blue-300 font-semibold"
-                  >
+                  <button onClick={() => setIsSuccess(false)} className="mt-8 text-blue-400 hover:text-blue-300 font-semibold">
                     {t.contact.form.successButton}
                   </button>
                 </div>
@@ -194,9 +180,7 @@ const ContactForm: React.FC = () => {
                         className={`w-full px-5 py-4 bg-slate-900 border rounded-2xl text-white focus:outline-none transition-colors ${fieldErrors.name ? 'border-red-500/50 focus:border-red-500' : 'border-white/10 focus:border-blue-500'}`}
                         placeholder={t.contact.form.placeholderName}
                       />
-                      {fieldErrors.name && (
-                        <p className="mt-1 text-xs text-red-400 font-medium">{fieldErrors.name}</p>
-                      )}
+                      {fieldErrors.name && <p className="mt-1 text-xs text-red-400 font-medium">{fieldErrors.name}</p>}
                     </div>
                     <div>
                       <label className="block text-slate-400 text-sm font-medium mb-2">{t.contact.form.emailLabel}</label>
@@ -208,9 +192,7 @@ const ContactForm: React.FC = () => {
                         className={`w-full px-5 py-4 bg-slate-900 border rounded-2xl text-white focus:outline-none transition-colors ${fieldErrors.email ? 'border-red-500/50 focus:border-red-500' : 'border-white/10 focus:border-blue-500'}`}
                         placeholder={t.contact.form.placeholderEmail}
                       />
-                      {fieldErrors.email && (
-                        <p className="mt-1 text-xs text-red-400 font-medium">{fieldErrors.email}</p>
-                      )}
+                      {fieldErrors.email && <p className="mt-1 text-xs text-red-400 font-medium">{fieldErrors.email}</p>}
                     </div>
                   </div>
                   <div>
@@ -223,16 +205,11 @@ const ContactForm: React.FC = () => {
                       className={`w-full px-5 py-4 bg-slate-900 border rounded-2xl text-white focus:outline-none transition-colors ${fieldErrors.message ? 'border-red-500/50 focus:border-red-500' : 'border-white/10 focus:border-blue-500'}`}
                       placeholder={t.contact.form.placeholderMessage}
                     />
-                    {fieldErrors.message && (
-                      <p className="mt-1 text-xs text-red-400 font-medium">{fieldErrors.message}</p>
-                    )}
+                    {fieldErrors.message && <p className="mt-1 text-xs text-red-400 font-medium">{fieldErrors.message}</p>}
                   </div>
                   
                   <div className="space-y-4">
-                    <button 
-                      disabled={isSubmitting}
-                      className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20"
-                    >
+                    <button disabled={isSubmitting} className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20">
                       {isSubmitting ? (
                         <span className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
                       ) : (
@@ -242,7 +219,6 @@ const ContactForm: React.FC = () => {
                         </>
                       )}
                     </button>
-                    
                     <p className="text-[10px] text-slate-500 text-center leading-tight">
                       {t.contact.form.captchaDisclaimer}
                     </p>
