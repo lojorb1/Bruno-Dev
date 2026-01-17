@@ -52,7 +52,7 @@ const LoadingScreen: React.FC = () => {
         </div>
 
         <div className="h-16 text-center flex flex-col items-center justify-center w-full">
-          <p className="text-white text-base md:text-lg font-bold tracking-tight animate-in slide-in-from-bottom-2 flex items-center gap-3">
+          <p className="text-white text-base md:text-lg font-bold tracking-tight animate-slide-up-sm flex items-center gap-3">
             <span className="text-blue-500 font-mono text-xs opacity-50">0{stepIndex + 1}</span>
             {LOADING_STEPS[stepIndex]}
           </p>
@@ -63,7 +63,7 @@ const LoadingScreen: React.FC = () => {
 
         <div className="mt-10 w-full max-w-[240px] h-1 bg-white/5 rounded-full relative overflow-hidden border border-white/5">
           <div 
-            className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ease-out animate-shimmer"
+            className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ease-out animate-shimmer-fast"
             style={{ width: `${progress}%` }}
           ></div>
         </div>

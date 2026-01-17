@@ -17,16 +17,16 @@
     <meta name="keywords" content="hire software developer, custom software development, freelance programmer, SaaS developer, full-stack engineer, cybersecurity consultant, remote developer">
     <link rel="canonical" href="https://brunodev.eu" />
 
-    <!-- Google reCAPTCHA v3 (Invisible) - Using placeholder key 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI for demonstration -->
+    <!-- Google reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" async defer></script>
 
-    <!-- Multilingual Hreflang Tags (International SEO) -->
+    <!-- Multilingual Tags -->
     <link rel="alternate" hreflang="en" href="https://brunodev.eu" />
     <link rel="alternate" hreflang="pt-BR" href="https://brunodev.eu/?lang=pt" />
     <link rel="alternate" hreflang="es-ES" href="https://brunodev.eu/?lang=es" />
     <link rel="alternate" hreflang="x-default" href="https://brunodev.eu" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://brunodev.eu">
     <meta property="og:title" content="Hire Senior Software Developer | BrunoDev">
@@ -68,46 +68,6 @@
                   "name": "Custom Software Development",
                   "description": "End-to-end bespoke software engineering designed for specific business workflows and scalability."
                 }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "SaaS Platform Engineering",
-                  "description": "Building multi-tenant SaaS products from the ground up, focusing on performance and recurring revenue logic."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "API & Systems Integration",
-                  "description": "Developing robust API architectures and connecting disparate business systems such as Stripe, CRMs, and ERPs."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Secure Cloud Infrastructure",
-                  "description": "Expert management of AWS/GCP environments with Docker, CI/CD, and high-availability protocols."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Cybersecurity Auditing",
-                  "description": "Professional vulnerability assessments and secure code audits to protect enterprise data assets."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Performance Engineering",
-                  "description": "Rescuing slow systems, optimizing database logic, and scaling legacy platforms for high performance."
-                }
               }
             ]
           }
@@ -121,148 +81,32 @@
           "sameAs": [
             "https://github.com/lojorb1",
             "https://www.linkedin.com/in/brunodeveu/"
-          ],
-          "worksFor": { "@id": "https://brunodev.eu/#organization" },
-          "knowsAbout": ["Full Stack Development", "SaaS Engineering", "Cybersecurity", "Cloud Infrastructure", "Laravel", "React", "Docker", "Node.js"]
-        },
-        {
-          "@type": "WebPage",
-          "@id": "https://brunodev.eu/#webpage",
-          "url": "https://brunodev.eu",
-          "name": "BrunoDev | Senior Software Development Portfolio",
-          "description": "Hire a senior developer with 10+ years of experience in SaaS development and cybersecurity.",
-          "mainEntity": { "@id": "https://brunodev.eu/#person" }
+          ]
         }
       ]
     }
     </script>
 
-    <!-- Polyfill for process -->
+    <!-- Polyfill -->
     <script>
         window.process = { env: { NODE_ENV: 'production' } };
     </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    animation: {
-                        'in': 'fadeIn 0.8s ease-out forwards',
-                        'fade-in': 'fadeIn 0.8s ease-out forwards',
-                        'slide-in-from-bottom-2': 'slideInFromBottom 0.5s ease-out forwards',
-                        'slide-in-from-bottom-10': 'slideInFromBottom 0.6s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideInFromBottom: {
-                            '0%': { transform: 'translateY(15px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
-            background-color: #020617; /* slate-950 */
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .bg-grid-white {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
-        }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Hardware Accelerated Animations */
-        @keyframes draw {
-          from { stroke-dashoffset: 1000; }
-          to { stroke-dashoffset: 0; }
-        }
-        .animate-draw path {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-          animation: draw 3s ease-in-out infinite;
-          will-change: stroke-dashoffset;
-        }
-        
-        @keyframes shimmer {
-          0% { transform: translateX(-100%) translateZ(0); }
-          100% { transform: translateX(100%) translateZ(0); }
-        }
-        .animate-shimmer {
-          position: relative;
-          overflow: hidden;
-        }
-        .animate-shimmer::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          transform: translateX(-100%);
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-          animation: shimmer 2s linear infinite;
-          will-change: transform;
-        }
-
-        @keyframes pulse-glow {
-          0%, 100% { opacity: 0.5; filter: blur(8px); transform: scale(1) translateZ(0); }
-          50% { opacity: 0.8; filter: blur(12px); transform: scale(1.05) translateZ(0); }
-        }
-        .animate-pulse-glow {
-          animation: pulse-glow 4s ease-in-out infinite;
-          will-change: opacity, transform, filter;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0) translateZ(0); }
-          50% { transform: translateY(-10px) translateZ(0); }
-        }
-        .animate-float {
-          animation: float 5s ease-in-out infinite;
-          will-change: transform;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-            scroll-behavior: auto !important;
-          }
-        }
-        /* Style reCAPTCHA badge if needed, though v3 is usually invisible or small */
-        .grecaptcha-badge { visibility: hidden; }
-    </style>
-<script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.473.0?external=react",
-    "react/": "https://esm.sh/react@^19.0.0/",
-    "react": "https://esm.sh/react@^19.0.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.0.0/",
-    "react-dom/client": "https://esm.sh/react-dom@^19.0.0/client",
-    "@vercel/node": "https://esm.sh/@vercel/node@^5.5.20",
-    "nodemailer": "https://esm.sh/nodemailer@^7.0.12"
-  }
-}
-</script>
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "lucide-react": "https://esm.sh/lucide-react@^0.473.0?external=react",
+        "react/": "https://esm.sh/react@^19.0.0/",
+        "react": "https://esm.sh/react@^19.0.0",
+        "react-dom/": "https://esm.sh/react-dom@^19.0.0/",
+        "react-dom/client": "https://esm.sh/react-dom@^19.0.0/client",
+        "@vercel/node": "https://esm.sh/@vercel/node@^5.5.20",
+        "nodemailer": "https://esm.sh/nodemailer@^7.0.12"
+      }
+    }
+    </script>
 </head>
 <body class="bg-slate-950 text-slate-100 selection:bg-blue-500/30">
     <div id="root"></div>
